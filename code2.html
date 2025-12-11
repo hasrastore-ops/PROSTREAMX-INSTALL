@@ -47,6 +47,189 @@
             --border-color: #334155;
         }
 
+        /* Welcome Modal Overlay */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .welcome-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .welcome-modal {
+            background: var(--light-card);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-overlay.active .welcome-modal {
+            transform: scale(1);
+            animation: modalBounce 0.5s ease;
+        }
+
+        @keyframes modalBounce {
+            0% { transform: scale(0.8); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .welcome-modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #25d366, #128C7E);
+        }
+
+        .welcome-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #25d366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .welcome-icon i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .welcome-title {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .welcome-features {
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .feature-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-item i {
+            color: #25d366;
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .welcome-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .welcome-btn-primary {
+            background: linear-gradient(135deg, #25d366, #128C7E);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .welcome-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .welcome-btn-primary:active {
+            transform: scale(0.95);
+        }
+
+        .welcome-btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 15px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .welcome-btn-secondary:hover {
+            background: var(--light-bg);
+            color: var(--text-primary);
+        }
+
+        .main-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -487,7 +670,7 @@
                 color: black;
             }
             
-            .theme-toggle, .video-section, .whatsapp-btn {
+            .theme-toggle, .video-section, .whatsapp-btn, .welcome-overlay {
                 display: none;
             }
             
@@ -556,6 +739,23 @@
                 padding: 12px 25px;
                 font-size: 1rem;
             }
+
+            .welcome-modal {
+                padding: 25px 20px;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+
+            .welcome-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .welcome-icon i {
+                font-size: 2.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -612,6 +812,37 @@
                 padding: 10px 20px;
                 font-size: 0.95rem;
             }
+
+            .welcome-modal {
+                padding: 20px 15px;
+            }
+
+            .welcome-title {
+                font-size: 1.3rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .welcome-icon {
+                width: 70px;
+                height: 70px;
+            }
+
+            .welcome-icon i {
+                font-size: 2rem;
+            }
+
+            .welcome-btn-primary {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .welcome-btn-secondary {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
         }
 
         /* Landscape mode optimizations */
@@ -637,195 +868,248 @@
                 margin-bottom: 10px;
                 padding: 8px;
             }
+
+            .welcome-modal {
+                max-height: 90vh;
+                overflow-y: auto;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <i class="fas fa-moon" id="themeIcon" aria-hidden="true"></i>
-        <span style="font-size: 0.8rem;">Tema</span>
-    </div>
-
-    <div class="container">
-        <!-- Header Section -->
-        <header class="header">
-            <h1 class="thank-you">
-                <i class="fas fa-heart" aria-hidden="true"></i> Terima Kasih!
-            </h1>
-            <p class="subtitle">Selamat datang ke keluarga Prostream</p>
-        </header>
-
-        <!-- Product Info Section -->
-        <section class="product-info">
-            <h2 class="section-title">
-                <i class="fas fa-box" aria-hidden="true"></i> Aplikasi Anda
-            </h2>
-            <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9rem;">
-                1 Applikasi Semua Boleh Layan!
-            </p>
-            <div class="apps-grid">
-                <div class="app-card" tabindex="0" role="button" aria-label="Movie+Drama">
-                    <div class="app-icon">
-                        <i class="fas fa-play" aria-hidden="true"></i>
-                    </div>
-                    <div class="app-name">MOVIE+DRAMA</div>
-                </div>
-                <div class="app-card" tabindex="0" role="button" aria-label="Movie Lagi">
-                    <div class="app-icon">
-                        <i class="fas fa-film" aria-hidden="true"></i>
-                    </div>
-                    <div class="app-name">MOVIE LAGI</div>
-                </div>
-                <div class="app-card" tabindex="0" role="button" aria-label="Anime">
-                    <div class="app-icon">
-                        <i class="fas fa-satellite" aria-hidden="true"></i>
-                    </div>
-                    <div class="app-name">ANIME</div>
-                </div>
-                <div class="app-card" tabindex="0" role="button" aria-label="Live TV+Astro">
-                    <div class="app-icon">
-                        <i class="fas fa-tv" aria-hidden="true"></i>
-                    </div>
-                    <div class="app-name">LIVE TV+ASTRO (FREE)</div>
-                </div>
+    <!-- Welcome Modal Overlay -->
+    <div class="welcome-overlay" id="welcomeOverlay">
+        <div class="welcome-modal">
+            <div class="welcome-icon">
+                <i class="fab fa-whatsapp"></i>
             </div>
-        </section>
-
-        <!-- Video Tutorial Section - NO BUTTONS -->
-        <section class="video-section">
-            <h2 class="section-title">
-                <i class="fas fa-video" aria-hidden="true"></i> Tutorial Pemasangan
-            </h2>
-            <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9rem;">
-                Ikuti video ini untuk pasang aplikasi. Gunakan fullscreen icon di video untuk tonton skrin penuh.
-            </p>
-            <div class="video-container">
-                <div class="video-loading" id="videoLoading">
-                    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading video...
-                </div>
-                <iframe 
-                    src="https://www.youtube.com/embed/50Sl9sOuUMk" 
-                    loading="lazy"
-                    onload="document.getElementById('videoLoading').style.display='none'"
-                    title="Tutorial Pemasangan Prostream"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </section>
-
-        <!-- Download Codes Section -->
-        <section class="codes-section">
-            <h2 class="section-title">
-                <i class="fas fa-download" aria-hidden="true"></i> Kod Muat Turun
-            </h2>
-            <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9rem;">
-                Gunakan kod ini di Apps downloader TV:
-            </p>
-            <div class="codes-grid">
-                <div class="code-card">
-                    <div class="code-label">PROSTREAMX</div>
-                    <div class="code-value">
-                        <span id="downloadCode">9430417</span>
-                        <button class="copy-btn" onclick="copyCode('downloadCode', this)" aria-label="Copy download code">
-                            <i class="fas fa-copy" aria-hidden="true"></i> Salin
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="instructions">
-                <h4>
-                    <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
-                    Panduan Penting
-                </h4>
-                <ul>
-                    <li>Masukkan kod yang betul di Apps downloader TV</li>
-                    <li>Semak internet sebelum mula</li>
-                    <li>WhatsApp kami jika ada masalah</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="codes-section">
-            <h2 class="section-title">
-                <i class="fa-solid fa-key fa-bounce" aria-hidden="true"></i> CODE LOGIN<i class="fa-solid fa-key fa-bounce" aria-hidden="true"></i>
-            </h2>
-            <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9rem;">
-                Ini adalah login code, Masukkan Nama dan Code untuk kali Pertama Login
-            </p>
-            <div class="codes-grid">
-                <div class="code-card">
-                    <div class="code-label">LOGIN CODE:</div>
-                    <div class="code-value">
-                        <span id="loginCode">2002</span>
-                        <button class="copy-btn" onclick="copyCode('loginCode', this)" aria-label="Copy login code">
-                            <i class="fas fa-copy" aria-hidden="true"></i> Salin
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="instructions">
-                <h4>
-                    <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
-                    Panduan Penting
-                </h4>
-                <ul>
-                    <li>Untuk Login, masukkan nama pendek + login code diatas</li>
-                    <li>Jangan lebih dari 2 device, Acc akan di block</li>
-                    <li>WhatsApp kami jika ada masalah</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- WhatsApp Channel Section -->
-        <section class="whatsapp-channel-section">
-            <h2 class="section-title">
-                <i class="fab fa-whatsapp" aria-hidden="true"></i> Saluran WhatsApp Rasmi
-            </h2>
-            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
-                Dapatkan kemas kini terkini dan maklumat penting mengenai aplikasi Prostream
+            <h2 class="welcome-title">Selamat Datang ke Prostream!</h2>
+            <p class="welcome-subtitle">
+                Join channel WhatsApp rasmi kami untuk dapatkan UPDATE dan INFO penting
             </p>
             
-            <div class="channel-highlight">
-                <div class="channel-icon">
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <div class="welcome-features">
+                <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Dapatkan kemas kini aplikasi terkini</span>
                 </div>
-                <div class="channel-info">
-                    <h3>PROSTREAM OFFICIAL</h3>
-                    <p>PASTIKAN JOIN CHANNEL WHATSAPP TERSEBUT UNTUK DAPATKAN INFO/APP UPDATE.</p>
+                <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Maklumat tentang isu dan penyelesaian</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Promosi dan tawaran eksklusif</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Bantuan teknikal</span>
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 25px;">
-                <a href="https://whatsapp.com/channel/0029VbBSIZyIXnlwmAkPK51t" target="_blank" class="channel-join-btn" aria-label="Join PROSTREAM OFFICIAL WhatsApp Channel">
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <div class="welcome-buttons">
+                <a href="https://whatsapp.com/channel/0029VbBSIZyIXnlwmAkPK51t" 
+                   target="_blank" 
+                   class="welcome-btn-primary"
+                   id="joinChannelBtn">
+                    <i class="fab fa-whatsapp"></i>
                     Join Channel Sekarang
                 </a>
+                <button class="welcome-btn-secondary" id="skipBtn">
+                    SKIP
+                </button>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- Support Section -->
-        <section class="support-section">
-            <h2 class="section-title" style="justify-content: center;">
-                <i class="fas fa-headset" aria-hidden="true"></i> Bantuan?
-            </h2>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">
-                Ada masalah? Hubungi kami segera
-            </p>
-            <a href="http://wasap.my/601127412402" target="_blank" class="whatsapp-btn" aria-label="Contact us on WhatsApp">
-                <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                WhatsApp
-            </a>
-        </section>
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Theme Toggle -->
+        <div class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <i class="fas fa-moon" id="themeIcon" aria-hidden="true"></i>
+            <span style="font-size: 0.8rem;">Tema</span>
+        </div>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>&copy; 2024 Prostream</p>
-            <p>Dibuat dengan <i class="fas fa-heart" style="color: #ff6b6b;" aria-hidden="true"></i></p>
-        </footer>
+        <div class="container">
+            <!-- Header Section -->
+            <header class="header">
+                <h1 class="thank-you">
+                    <i class="fas fa-heart" aria-hidden="true"></i> Terima Kasih!
+                </h1>
+                <p class="subtitle">Selamat datang ke keluarga Prostream</p>
+            </header>
+
+            <!-- Product Info Section -->
+            <section class="product-info">
+                <h2 class="section-title">
+                    <i class="fas fa-box" aria-hidden="true"></i> Aplikasi Anda
+                </h2>
+                <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9rem;">
+                    1 Applikasi Semua Boleh Layan!
+                </p>
+                <div class="apps-grid">
+                    <div class="app-card" tabindex="0" role="button" aria-label="Movie+Drama">
+                        <div class="app-icon">
+                            <i class="fas fa-play" aria-hidden="true"></i>
+                        </div>
+                        <div class="app-name">MOVIE+DRAMA</div>
+                    </div>
+                    <div class="app-card" tabindex="0" role="button" aria-label="Movie Lagi">
+                        <div class="app-icon">
+                            <i class="fas fa-film" aria-hidden="true"></i>
+                        </div>
+                        <div class="app-name">MOVIE LAGI</div>
+                    </div>
+                    <div class="app-card" tabindex="0" role="button" aria-label="Anime">
+                        <div class="app-icon">
+                            <i class="fas fa-satellite" aria-hidden="true"></i>
+                        </div>
+                        <div class="app-name">ANIME</div>
+                    </div>
+                    <div class="app-card" tabindex="0" role="button" aria-label="Live TV+Astro">
+                        <div class="app-icon">
+                            <i class="fas fa-tv" aria-hidden="true"></i>
+                        </div>
+                        <div class="app-name">LIVE TV+ASTRO (FREE)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Tutorial Section - NO BUTTONS -->
+            <section class="video-section">
+                <h2 class="section-title">
+                    <i class="fas fa-video" aria-hidden="true"></i> Tutorial Pemasangan
+                </h2>
+                <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9rem;">
+                    Ikuti video ini untuk pasang aplikasi. Gunakan fullscreen icon di video untuk tonton skrin penuh.
+                </p>
+                <div class="video-container">
+                    <div class="video-loading" id="videoLoading">
+                        <i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading video...
+                    </div>
+                    <iframe 
+                        src="https://www.youtube.com/embed/50Sl9sOuUMk" 
+                        loading="lazy"
+                        onload="document.getElementById('videoLoading').style.display='none'"
+                        title="Tutorial Pemasangan Prostream"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </section>
+
+            <!-- Download Codes Section -->
+            <section class="codes-section">
+                <h2 class="section-title">
+                    <i class="fas fa-download" aria-hidden="true"></i> Kod Muat Turun
+                </h2>
+                <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9rem;">
+                    Gunakan kod ini di Apps downloader TV:
+                </p>
+                <div class="codes-grid">
+                    <div class="code-card">
+                        <div class="code-label">PROSTREAMX</div>
+                        <div class="code-value">
+                            <span id="downloadCode">1769731</span>
+                            <button class="copy-btn" onclick="copyCode('downloadCode', this)" aria-label="Copy download code">
+                                <i class="fas fa-copy" aria-hidden="true"></i> Salin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructions">
+                    <h4>
+                        <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
+                        Panduan Penting
+                    </h4>
+                    <ul>
+                        <li>Masukkan kod yang betul di Apps downloader TV</li>
+                        <li>Semak internet sebelum mula</li>
+                        <li>WhatsApp kami jika ada masalah</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="codes-section">
+                <h2 class="section-title">
+                    <i class="fa-solid fa-key fa-bounce" aria-hidden="true"></i> CODE LOGIN<i class="fa-solid fa-key fa-bounce" aria-hidden="true"></i>
+                </h2>
+                <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9rem;">
+                    Ini adalah login code, Masukkan Nama dan Code untuk kali Pertama Login
+                </p>
+                <div class="codes-grid">
+                    <div class="code-card">
+                        <div class="code-label">LOGIN CODE:</div>
+                        <div class="code-value">
+                            <span id="loginCode">2002</span>
+                            <button class="copy-btn" onclick="copyCode('loginCode', this)" aria-label="Copy login code">
+                                <i class="fas fa-copy" aria-hidden="true"></i> Salin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructions">
+                    <h4>
+                        <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
+                        Panduan Penting
+                    </h4>
+                    <ul>
+                        <li>Untuk Login, masukkan nama pendek + login code diatas</li>
+                        <li>Jangan lebih dari 2 device, Acc akan di block</li>
+                        <li>WhatsApp kami jika ada masalah</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- WhatsApp Channel Section -->
+            <section class="whatsapp-channel-section">
+                <h2 class="section-title">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Saluran WhatsApp Rasmi
+                </h2>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                    Dapatkan kemas kini terkini dan maklumat penting mengenai aplikasi Prostream
+                </p>
+                
+                <div class="channel-highlight">
+                    <div class="channel-icon">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                    </div>
+                    <div class="channel-info">
+                        <h3>PROSTREAM OFFICIAL</h3>
+                        <p>PASTIKAN JOIN CHANNEL WHATSAPP TERSEBUT UNTUK DAPATKAN INFO/APP UPDATE.</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 25px;">
+                    <a href="https://whatsapp.com/channel/0029VbBSIZyIXnlwmAkPK51t" target="_blank" class="channel-join-btn" aria-label="Join PROSTREAM OFFICIAL WhatsApp Channel">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        Join Channel Sekarang
+                    </a>
+                </div>
+            </section>
+
+            <!-- Support Section -->
+            <section class="support-section">
+                <h2 class="section-title" style="justify-content: center;">
+                    <i class="fas fa-headset" aria-hidden="true"></i> Bantuan?
+                </h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                    Ada masalah? Hubungi kami segera
+                </p>
+                <a href="http://wasap.my/601127412402" target="_blank" class="whatsapp-btn" aria-label="Contact us on WhatsApp">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                    WhatsApp
+                </a>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>&copy; 2024 Prostream</p>
+                <p>Dibuat dengan <i class="fas fa-heart" style="color: #ff6b6b;" aria-hidden="true"></i></p>
+            </footer>
+        </div>
     </div>
 
     <!-- Toast Notification -->
@@ -851,6 +1135,62 @@
     </script>
 
     <script>
+        // Welcome Modal Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const welcomeOverlay = document.getElementById('welcomeOverlay');
+            const mainContent = document.getElementById('mainContent');
+            const joinChannelBtn = document.getElementById('joinChannelBtn');
+            const skipBtn = document.getElementById('skipBtn');
+            
+            // Check if user has already seen the welcome modal
+            const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
+            
+            if (!hasSeenWelcome) {
+                // Show welcome modal with a slight delay for smooth entrance
+                setTimeout(() => {
+                    welcomeOverlay.classList.add('active');
+                }, 100);
+            } else {
+                // Show main content directly if already seen
+                mainContent.classList.add('visible');
+            }
+            
+            // Handle join channel button click
+            joinChannelBtn.addEventListener('click', function(e) {
+                // Mark as seen and close modal
+                localStorage.setItem('hasSeenWelcome', 'true');
+                welcomeOverlay.classList.remove('active');
+                
+                // Show main content after a short delay
+                setTimeout(() => {
+                    mainContent.classList.add('visible');
+                }, 300);
+                
+                // The link will open in a new tab due to target="_blank"
+            });
+            
+            // Handle skip button click
+            skipBtn.addEventListener('click', function() {
+                // Mark as seen and close modal
+                localStorage.setItem('hasSeenWelcome', 'true');
+                welcomeOverlay.classList.remove('active');
+                
+                // Show main content after a short delay
+                setTimeout(() => {
+                    mainContent.classList.add('visible');
+                }, 300);
+            });
+            
+            // Prevent escape key from closing modal (optional)
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && welcomeOverlay.classList.contains('active')) {
+                    // You can choose to allow or prevent closing with Escape
+                    // For now, we'll allow it
+                    skipBtn.click();
+                }
+            });
+        });
+
         // Theme Toggle
         function toggleTheme() {
             const body = document.body;
@@ -994,5 +1334,4 @@
         });
     </script>
 </body>
-
 </html>
